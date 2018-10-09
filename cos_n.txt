@@ -1,2 +1,1 @@
-5 B LabVIEW_Programming_Language
-5 IJK Competitive_Programming_(II)
+5 B ED117_Introduction_to_Machine_Learning

@@ -18,26 +18,26 @@ put_in_table (){
 
 CutString (){
 
-	begin=1;end=7
+	begin=1;end=10
 	row=1
 	
-	while [ $row -le 5 ]
+	while [ $row -le 7 ]
 	do
 		for col in $@
 		do
-			printf "|%-7s" $(echo $col | cut -c $begin-$end) >> formal_table.txt
+			printf "|%-10s" $(echo $col | cut -c $begin-$end) >> formal_table.txt
 		done
 		printf "\n" >> formal_table.txt
-		begin=$(( $begin + 7 ))
-		end=$(( $end + 7 ))
+		begin=$(( $begin + 10 ))
+		end=$(( $end + 10 ))
 		row=$(( $row + 1 ))
 	done
 }
 
 >formal_table.txt
 
-echo " .Mon    .Tue    .Wed    .Thr    .Fri   " >> formal_table.txt
-echo " ======= ======= ======= ======= =======" >> formal_table.txt
+echo " .Mon       .Tue       .Wed       .Thr       .Fri      " >> formal_table.txt
+echo " ========== ========== ========== ========== ==========" >> formal_table.txt
 
 while [ $eleven -le 11 ]
 do
@@ -54,6 +54,6 @@ do
 	e=$(printf "%-35s\n" $e)
 	
 	CutString $a $b $c $d $e 
-	echo " ------- ------- ------- ------- -------" >> formal_table.txt
+	echo " ---------- ---------- ---------- ---------- ----------" >> formal_table.txt
 	eleven=$(( $eleven + 1 ))
 done

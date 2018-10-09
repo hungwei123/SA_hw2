@@ -1,10 +1,4 @@
-1 CD Math
-2 GH Computer
-1 GH Calculus_(I)
-4 CD Calculus_(I)
-2 EF LabVIEW_Programming_Language
-5 B LabVIEW_Programming_Language
-5 IJK Competitive_Programming_(II)
-6 EFG Competitive_Programming(III)
-4 IJK Computer_System_Administration
-3 CD Probability
+4 CD SC207_Calculus_(I)
+4 GH SC001_Physics_(I)
+2 EF ED117_Introduction_to_Machine_Learning
+5 B ED117_Introduction_to_Machine_Learning
