@@ -62,6 +62,8 @@ get_cos_info() {
 	if [ "$res" == "Not Exist!" ];then
 	       insert
 #	       echo "done"
+	else
+		echo $one_cos >> conflict.txt
 	fi
 }
 
@@ -93,16 +95,18 @@ show_menu () {
 		show_menu
 		;;
 	2)
+		> conflict.txt
 		dialog --checklist "Add New Courses" 80 80 10 \
 			$(cat checklist.txt) 2>chosen_num.txt
 		if [ "$?" == "0" ];then
 			for num in $(cat chosen_num.txt)
 			do
-			one_cos=$(grep "^$num " checklist.txt)
-			one_cos=$(echo $one_cos | awk '{print $2}')
-#			echo $one_cos
-			get_cos_info
+				one_cos=$(grep "^$num " checklist.txt)
+				one_cos=$(echo $one_cos | awk '{print $2}')
+#				echo $one_cos
+				get_cos_info
 			done
+			dialog --title "Conflict Courses:" --textbox conflict.txt 80 80
 #			sleep 5
 			sh print.sh
 			dialog --title "Timetable" --textbox formal_table.txt 150 100
