@@ -25,17 +25,19 @@ CutString (){
 	do
 		for col in $@
 		do
-			printf "|%-7s" $(echo $col | cut -c $begin-$end)
+			printf "|%-7s" $(echo $col | cut -c $begin-$end) >> formal_table.txt
 		done
-		printf "\n"
+		printf "\n" >> formal_table.txt
 		begin=$(( $begin + 7 ))
 		end=$(( $end + 7 ))
 		row=$(( $row + 1 ))
 	done
 }
 
-echo " .Mon    .Tue    .Wed    .Thr    .Fri   "
-echo " ======= ======= ======= ======= ======="
+>formal_table.txt
+
+echo " .Mon    .Tue    .Wed    .Thr    .Fri   " >> formal_table.txt
+echo " ======= ======= ======= ======= =======" >> formal_table.txt
 
 while [ $eleven -le 11 ]
 do
@@ -51,7 +53,7 @@ do
 	d=$(printf "%-35s\n" $d)
 	e=$(printf "%-35s\n" $e)
 	
-	CutString $a $b $c $d $e
-	echo " ------- ------- ------- ------- -------"
+	CutString $a $b $c $d $e 
+	echo " ------- ------- ------- ------- -------" >> formal_table.txt
 	eleven=$(( $eleven + 1 ))
 done

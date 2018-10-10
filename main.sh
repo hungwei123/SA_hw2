@@ -1,7 +1,7 @@
 #!/bin/sh
 
 check() {
-	exist1=$(cat cos_table.txt | grep "^$day1" | awk '{print $2}' | grep "[$tim1]") 
+	exist1=$(cat cos_table.txt | awk '{print $1,$2}' | grep ${day1} |  grep "[$tim1]") 
 	if [ $day_n > 1 ];then
 		exist2=$(cat cos_table.txt | grep "^$day2" | awk '{print $2}' | grep "[$tim2]")
 	else
@@ -65,10 +65,16 @@ done
 dialog --checklist "Choose one:" 80 80 10 \
 	$(cat checklist.txt) 2>chosen_num.txt
 
-for num in $(cat chosen_num.txt)
-do
-	one_cos=$(grep "^$num " checklist.txt)
-	one_cos=$(echo $one_cos | awk '{for(i=2;i<NF;i++)print $i}')
-	echo $one_cos
-	get_cos_info
-done
+if [ "$?" == "0" ];then
+	for num in $(cat chosen_num.txt)
+		do
+		one_cos=$(grep "^$num " checklist.txt)
+		one_cos=$(echo $one_cos | awk '{for(i=2;i<NF;i++)print $i}')
+		echo $one_cos
+		get_cos_info
+	done
+	sleep 5
+	sh print.sh
+
+	dialog --title "Timetable" --textbox formal_table.txt 150 100
+fi

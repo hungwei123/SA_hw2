@@ -5,3 +5,6 @@
 2 EF LabVIEW_Programming_Language
 5 B LabVIEW_Programming_Language
 5 IJK Competitive_Programming_(II)
+6 EFG Competitive_Programming(III)
+4 IJK Computer_System_Administration
+3 CD Probability
