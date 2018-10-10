@@ -1,0 +1,7 @@
+1 CD Math
+2 GH Computer
+1 GH Calculus_(I)
+4 CD Calculus_(I)
+2 EF LabVIEW_Programming_Language
+5 B LabVIEW_Programming_Language
+5 IJK Competitive_Programming_(II)
