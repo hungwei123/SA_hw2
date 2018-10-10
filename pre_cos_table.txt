@@ -1,2 +1,1 @@
-1 GH EE105_Calculus_(I)
-4 CD EE105_Calculus_(I)
+6 EFG ED302_Competitive_Programming(III)

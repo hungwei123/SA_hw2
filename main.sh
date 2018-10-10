@@ -82,19 +82,26 @@ get_rm_cos_info() {
 		rm_tim2=$(echo $rm_tim | awk '{print $2}')
 		echo "$rm_day2 $rm_tim2 $rm_cname" >> cos_table.txt
 	fi
-	uniq -u cos_table.txt > cos_table.txt
+	cat cos_table.txt | sort -n | uniq -u > not_r_w_simul.txt
+	cat not_r_w_simul.txt > cos_table.txt
+	rm not_r_w_simul.txt
 }
 
 show_menu () {
 
-	dialog --menu "Menu" 20 60 14 1 "Show Your Timetable" 2 "Add New Courses" 3 "Remove Selected Courses" 4 "Reset Your Timetable" 5 "Exit" 2> menu_select.txt
+	dialog --menu "Menu" 20 60 14 1 "Show Your Timetable" 2 "Show Expanded Timetable" 3 "Add New Courses" 4 "Remove Selected Courses" 5 "Reset Your Timetable" 2> menu_select.txt
 
 	case $(cat menu_select.txt) in
 	1)
-		dialog --title "Timetable" --textbox formal_table.txt 150 100
+		dialog --title "Timetable" --textbox formal_table.txt 150 70
 		show_menu
 		;;
 	2)
+		sh print_expand.sh	
+		dialog --title "Expanded Timetable" --textbox expand_formal_table.txt 200 90
+		show_menu
+		;;
+	3)
 		> conflict.txt
 		dialog --checklist "Add New Courses" 80 80 10 \
 			$(cat checklist.txt) 2>chosen_num.txt
@@ -109,11 +116,11 @@ show_menu () {
 			dialog --title "Conflict Courses:" --textbox conflict.txt 80 80
 #			sleep 5
 			sh print.sh
-			dialog --title "Timetable" --textbox formal_table.txt 150 100
+			dialog --title "Timetable" --textbox formal_table.txt 150 70
 		fi
 		show_menu
 		;;
-	3)
+	4)
 		remove
 		dialog --checklist "Removed Selected Courses" 80 80 10 \
 			$(cat remove_checklist.txt) 2>remove_num.txt
@@ -127,22 +134,18 @@ show_menu () {
 			done
 #			sleep 5
 			sh print.sh
-			dialog --title "Timetable" --textbox formal_table.txt 150 100
+			dialog --title "Timetable" --textbox formal_table.txt 150 70
 		fi
 		show_menu
 		;;
-	4)
+	5)
 		> cos_table.txt
 		> have_selected.txt
 		sh print.sh
-		dialog --title "Timetable" --textbox formal_table.txt 150 100
+		dialog --title "Timetable" --textbox formal_table.txt 150 70
 		show_menu
 		;;	
-	5)
-		dialog --title "Exit?" --yesno "Sure to exit?" 5 25 
-		if [ $? == 1 ];then
-			show_menu
-		fi
+	*)
 		;;
 	esac
 
@@ -161,7 +164,8 @@ do
 	id=$(( $id + 1 ))
 done
 
-
 ##### start up
 
 show_menu
+
+##### end

@@ -1,3 +1,3 @@
-4CD,SC207,Calculus,(I),
-4GH,SC001,Physics,(I),
-2EF5B,ED117,Introduction,to,Machine,Learning,
+1GH4CD,SA321,Calculus,(I),
+1CD4GH,SC110,Physics(I),
+6EFG,ED302,Competitive,Programming(III),
