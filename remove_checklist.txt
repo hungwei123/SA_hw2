@@ -1,3 +1,1 @@
-1 1GH4CD,SA321,Calculus,(I), off
-2 1CD4GH,SC110,Physics(I), off
-3 6EFG,ED302,Competitive,Programming(III), off
+1 1N3N5N-EC316:Basic_Programming off

@@ -1,3 +1,0 @@
-1 GH SA321_Calculus_(I)
-4 CD SA321_Calculus_(I)
-6 EFG ED302_Competitive_Programming(III)

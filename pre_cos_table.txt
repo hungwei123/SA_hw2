@@ -1,1 +1,3 @@
-6 EFG ED302_Competitive_Programming(III)
+1 N EC316-Basic_Programming
+3 N EC316-Basic_Programming
+5 N EC316-Basic_Programming
