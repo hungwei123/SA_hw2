@@ -1,3 +1,3 @@
-1 N EC316-Basic_Programming
-3 N EC316-Basic_Programming
-5 N EC316-Basic_Programming
+1 EF EC114-Introduction_to_Computers_and_Programming
+2 IJK EC315-Introduction_to_Computers_and_Programming
+4 B EC114-Introduction_to_Computers_and_Programming

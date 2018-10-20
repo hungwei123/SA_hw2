@@ -112,9 +112,23 @@ update_checklist() {
 
 get_available() {
 
+	> pre_available.txt
+	
+	list=$(cat all_cos.txt)
+	
+	id=1
+	for line in $list
+	do
+		id_on=$(cat cos_num_table.txt | grep "$id" | awk 'NR==1{print $1}')
+		if [ "$id_on" != "$id" ];then
+			echo $line >> pre_available.txt
+		fi
+		id=$(( $id + 1 ))
+	done
+	
 	> print_available.txt
 
-	for ava in $(cat all_cos.txt)
+	for ava in $(cat pre_available.txt)
 	do
 		aname=$(echo $ava | awk 'BEGIN{FS=":"}{print $2}') 
 #		echo $aname
@@ -168,7 +182,7 @@ show_menu () {
 			update_checklist
 			> have_inserted.txt
 
-	        	dialog --checklist "Add New Courses" 150 90 50 \
+	        	dialog --checklist "Add New Courses" 80 80 10 \
 	        		$(cat checklist.txt) 2>chosen_num.txt
 	        	if [ "$?" == "0" ];then
 	        		for num in $(cat chosen_num.txt)
@@ -187,11 +201,11 @@ show_menu () {
 	        		done
 
 	        		if [ -s have_inserted.txt ];then
-	        			dialog --title "Successfully Selected:" --textbox have_inserted.txt 80 50
+	        			dialog --title "Successfully Selected:" --textbox have_inserted.txt 80 80
 				fi
 
 	        		if [ -s conflict.txt ];then
-	        			dialog --title "Conflict Courses:" --textbox conflict.txt 80 50
+	        			dialog --title "Conflict Courses:" --textbox conflict.txt 80 80
 	        			sh print.sh
 	        			dialog --title "Timetable" --textbox formal_table.txt 150 70
 				else
@@ -227,15 +241,8 @@ show_menu () {
 	5)
 		get_available
 		dialog --title "Show Available Courses" --textbox print_available.txt 150 70
-		show_menu
 		;;
 	6)
-		dialog --title "Find Courses" --inputbox "Input Course Name or Course Time:" 10 50 2> input_find.txt
-		input=$(cat input_find.txt)
-		> find_result.txt
-		grep -i "$input" all_cos.txt >> find_result.txt
-		dialog --title "Show Found Courses" --textbox find_result.txt 80 80
-		show_menu
 		;;
 	7)
 		> cos_table.txt
