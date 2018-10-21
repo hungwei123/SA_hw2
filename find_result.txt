@@ -1,2 +1,3 @@
-5IJK-EC122:Competitive_Programming_(II)
-5IJK-EC122:Competitive_Programming_(II)
+1CD3B-EC122:Differential_Equations
+1CD3B-EC115:Differential_Equations
+1EF4B-ED202:Queuing_Theory

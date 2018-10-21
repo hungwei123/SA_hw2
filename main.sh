@@ -4,7 +4,7 @@ insert() {
 #	echo "insert here"
 #	cat pre_cos_table.txt
 	cat pre_cos_table.txt >> cos_table.txt
-	echo $one_num","$one_cos >> have_selected.txt
+	echo $one_num"#"$one_cos >> have_selected.txt
 	echo $one_num >> cos_num_table.txt
 	echo $one_cos >> have_inserted.txt
 }
@@ -15,9 +15,9 @@ remove() {
 
 	for line_cos in $cos_selected
 	do
-		id2=$(echo $line_cos | awk 'BEGIN{FS=","}{print $1}')
+		id2=$(echo $line_cos | awk 'BEGIN{FS="#"}{print $1}')
 #		echo $id2
-		cos2=$(echo $line_cos | awk 'BEGIN{FS=","}{print $2}')
+		cos2=$(echo $line_cos | awk 'BEGIN{FS="#"}{print $2}')
 #		echo $cos2
 		echo "$id2 $cos2 off" >> remove_checklist.txt
 	done
@@ -187,11 +187,11 @@ show_menu () {
 	        		done
 
 	        		if [ -s have_inserted.txt ];then
-	        			dialog --title "Successfully Selected:" --textbox have_inserted.txt 80 50
+	        			dialog --title "Successfully Selected:" --textbox have_inserted.txt 70 80
 				fi
 
 	        		if [ -s conflict.txt ];then
-	        			dialog --title "Conflict Courses:" --textbox conflict.txt 80 50
+	        			dialog --title "Conflict Courses:" --textbox conflict.txt 70 80
 	        			sh print.sh
 	        			dialog --title "Timetable" --textbox formal_table.txt 150 70
 				else

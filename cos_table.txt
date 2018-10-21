@@ -1,12 +1,4 @@
+1 CD SC110-Physics(I)
 1 GH SA321-Calculus_(I)
 4 CD SA321-Calculus_(I)
-1 CD SC110-Physics(I)
 4 GH SC110-Physics(I)
-2 A AB101-Service_Learning_II
-1 B EC015-Intro._to_Computer_Networks
-4 EF EC015-Intro._to_Computer_Networks
-3 AB -Physical_Education
-2 EF -Physical_Education
-1 EF EC114-Introduction_to_Computers_and_Programming
-2 IJK EC315-Introduction_to_Computers_and_Programming
-4 B EC114-Introduction_to_Computers_and_Programming

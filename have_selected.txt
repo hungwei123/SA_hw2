@@ -1,7 +1,2 @@
-1,1GH4CD-SA321:Calculus_(I)
-8,1CD4GH-SC110:Physics(I)
-22,2A-AB101:Service_Learning_II
-56,1B4EF-EC015:Intro._to_Computer_Networks
-91,3AB-:Physical_Education
-104,2EF-:Physical_Education
-37,1EF-EC114,2IJK-EC315,4B-EC114:Introduction_to_Computers_and_Programming
+1#1GH4CD-SA321:Calculus_(I)
+8#1CD4GH-SC110:Physics(I)

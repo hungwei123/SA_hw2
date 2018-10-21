@@ -1,3 +1,2 @@
-1 EF EC114-Introduction_to_Computers_and_Programming
-2 IJK EC315-Introduction_to_Computers_and_Programming
-4 B EC114-Introduction_to_Computers_and_Programming
+1 CD SC110-Physics(I)
+4 GH SC110-Physics(I)
