@@ -1,2 +1,4 @@
 1 1GH4CD-SA321:Calculus_(I) off
 8 1CD4GH-SC110:Physics(I) off
+17 5IJK-EC122:Competitive_Programming_(II) off
+18 6EFG-ED302:Competitive_Programming(III) off

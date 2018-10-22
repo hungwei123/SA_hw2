@@ -1,3 +1,2 @@
-1CD3B-EC122:Differential_Equations
-1CD3B-EC115:Differential_Equations
+1EF4B-EC115,4IJK-EC315:Introduction_to_Computers_and_Programming
 1EF4B-ED202:Queuing_Theory
