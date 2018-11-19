@@ -1,0 +1,69 @@
+#!/bin/sh
+
+# $FreeBSD$
+#
+# PROVIDE: ftp_watchd
+# REQUIRE: LOGIN
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name="ftp_watchd"
+rcvar="ftp_watchd_enable"
+pidfile="/var/run/pure-uploadscript.pid"
+procname="/usr/local/sbin/pure-uploadscript"
+start_cmd="${name}_start"
+#stop_cmd="${name}_stop"
+
+check_pidfile $pidfile $procname
+
+load_rc_config $name
+
+ftp_watchd_start(){
+	process=$(ps auxww | grep "pure-uploadscript" | grep -v "grep" | wc -l)
+	if [ $process -eq 0 ];then
+		/usr/local/sbin/pure-uploadscript -B -r /usr/local/etc/ftp_watchd
+		echo "You start ftp_watchd."
+	else
+		pid=$(ps auxww | grep "pure-uploadscript" | grep -v "grep" | awk '{print $2}')
+		echo "ftp_watchd already start ? (pid: $pid)"
+	fi
+}
+
+#ftp_watchd_stop(){
+#	echo "ftp_watchd stopped."
+#	test -e /var/run/pure-uploadscript.pid
+#	if [ "$?" == "0" ];then
+#		pid=$(cat /var/run/pure-uploadscript.pid)
+#		kill -9 $pid
+#		echo "Kill: $pid"
+#		rm /var/run/pure-uploadscript.pid
+#	fi
+#}
+
+#ftp_watchd_restart(){
+#	ftp_watchd_stop
+#	ftp_watchd_start
+#}
+
+#ftp_watchd_status(){
+#	test -e /var/run/pure-uploadscript.pid
+#	if [ "$?" == "0" ];then
+#		pid=$(cat /var/run/pure-uploadscript.pid)
+#		echo "${name} is running as pid $pid."
+#	else
+#		echo "${name} is not running."
+#	fi
+#}
+
+#if [ "${ftp_watchd_enable:=no}" == "YES" ];then
+#	if [ "$1" == "status" ];then
+#		ftp_watchd_status
+#	elif [ "$1" == "poll" ];then
+#		echo "What?"
+#	else
+#		run_rc_command "$1"
+#	fi
+#
+#fi
+run_rc_command "$1"
