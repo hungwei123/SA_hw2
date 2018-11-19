@@ -1,0 +1,105 @@
+#!/bin/sh
+
+OPT=$1
+TARGET=$2
+ID=$3
+DATE=$(date -j +"%Y-%m-%d%.%H:%M:%S")
+
+case $OPT in
+	--list)
+		echo "ID     Dataset                  Time"
+		id=1
+		ss=$(zfs list -t snapshot | awk '{if(NR!=1)print $1}')
+		if [ "$TARGET" == "" ];then
+			for s in $ss;do
+				name=$(echo $s | awk 'BEGIN{FS="@"}{print $1}')
+				date=$(echo $s | awk 'BEGIN{FS="@"}{print $2}')
+				printf "%-7s" $id
+				printf "%-25s" $name
+				printf "%-22s\n" $date
+				id=$(( $id + 1))
+			done
+		else
+			for s in $ss;do
+				tar=$(echo $s | grep "^[$TARGET]")
+				if [ "$tar" == "" ];then
+					id=$(( $id + 1))
+				        continue
+			       	fi
+				name=$(echo $s | awk 'BEGIN{FS="@"}{print $1}')
+				date=$(echo $s | awk 'BEGIN{FS="@"}{print $2}')
+				printf "%-7s" $id
+				printf "%-25s" $name
+				printf "%-22s\n" $date
+				id=$(( $id + 1))
+			done
+		fi	
+	;;
+	--delete)
+		if [ "$TARGET" != "" ];then
+			if [ "$ID" == "" ];then
+				snapshot=$(zfs list -t snapshot | grep "^[$TARGET]" | awk '{print $1}')
+				for ss in $snapshot;do
+					zfs destroy "$ss"
+					"Delete $ss"
+				done
+			else
+				snapshot=$(zfs list -t snapshot | grep "^[$TARGET]" | awk '{print $1}')
+				id=1
+				for ss in $snapshot;do
+					if [ $id -eq $ID ];then
+						zfs destroy "$ss"
+						echo "Delete $ss"
+						break
+					fi
+					id=$(( $id + 1 ))
+				done
+			fi
+		fi
+	;;
+	--export)
+	
+	;;
+	--import)
+	
+	;;
+	*)
+		TARGET=$1
+		COUNT=$2
+		if [ "$TARGET" == "" ];then 
+			echo "More arguments are needed."
+			exit
+		fi
+		datasets=$(zfs list | grep "^[$TARGET]" | awk '{print $1}')
+		if [ "$datasets" == "" ];then 
+			echo "ERROR!"
+			exit
+		fi
+		for ds in $datasets;do
+			zfs snapshot "$ds"@"$DATE"
+			echo "Snap $ds@$DATE"
+		done
+		if [ "$COUNT" == "" ];then
+			COUNT=20
+		fi
+		n_ss=$(zfs list -t snapshot | grep "^[$TARGET]" | wc -l);
+		diff=$(( $n_ss - $COUNT ))
+		#echo $diff
+		while [ $diff -gt 0 ];do
+			ss=$(zfs list -t snapshot | grep "^[$TARGET]" | awk '{print $1}')
+			tim=$(zfs list -t snapshot | grep "^[$TARGET]" | awk 'BEGIN{FS="[@ ]"}{print $2}' | sort)
+			old=$(echo $tim | awk '{print $1}')
+			for s in $ss;do
+				t=$(echo $s | awk 'BEGIN{FS="@"}{print $2}')
+				if [ "$t" == "$old" ];then
+					zfs destroy $s
+					echo "Rotate $s"
+					diff=$(( $diff - 1 ))
+					#echo $diff
+					break;
+				fi
+			done
+		done
+	;;
+
+esac
