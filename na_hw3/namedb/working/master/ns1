@@ -1,0 +1,30 @@
+$TTL	10800
+$ORIGIN	0616005.nasa.
+
+@	IN	SOA	0616005.nasa. root.0616005.nasa. (
+			2019052300	; serial number
+			1H		; refresh time
+			30M		; retry
+			5W		; expire
+			2H )		; minimum
+
+router			IN	A	10.113.49.254
+ldap1			IN	A	10.113.49.11
+ldap2			IN	A	10.113.49.12
+ns1			IN	A	10.113.49.1
+ns2			IN	A	10.113.49.2
+
+@			IN 	NS	ns1.0616005.nasa. 
+			IN	NS	ns2.0616005.nasa.
+
+254.49.113.10		IN 	PTR	router.0616005.nasa.
+11.49.113.10		IN	PTR	ldap1.0616005.nasa.
+12.49.113.10		IN	PTR	ldap2.0616005.nasa.
+1.49.113.10		IN 	PTR	ns1.0616005.nasa.
+2.49.113.10		IN	PTR	ns2.0616005.nasa.
+
+
+nasa			IN	CNAME	nasa.cs.nctu.edu.tw.
+friend			IN	CNAME	ns2
+
+

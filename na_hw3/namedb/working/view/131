@@ -1,0 +1,11 @@
+$TTL	10800
+$ORIGIN	view.0616005.nasa.
+
+@	IN	SOA	view.0616005.nasa. root.0616005.nasa. (
+			2019052300	; serial number
+			1H		; refresh time
+			30M		; retry
+			5W		; expire
+			2H )		; minimum
+
+view	IN	A	140.113.235.131
